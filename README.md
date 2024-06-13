@@ -21,7 +21,9 @@ Para calcular _cuántos días_ lleva un viaje de playa, se hace esta cuenta: `la
 
 #### Excursión a ciudad
 De cada **excursión a ciudad** se informa cuántas atracciones se van a visitar. 
-Los _días_ que lleva un viaje de este tipo se calculan como `cantidad de atracciones / 2`. Una excursión _implica esfuerzo_ si se visitan entre 5 y 8 atracciones, y nunca _sirve para broncearse_. 
+Los _días_ que lleva un viaje de este tipo se 
+calculan como `cantidad de atracciones / 2`.
+ Una excursión _implica esfuerzo_ si se visitan entre 5 y 8 atracciones, y nunca _sirve para broncearse_. 
 
 Un caso especial son las **excursiones a ciudad tropical**. Son como las excursiones a ciudad, con las siguientes variantes: dura un día más que una excursión a ciudad de las mismas características, y sí sirve para broncearse, siempre.
 

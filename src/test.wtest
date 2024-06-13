@@ -1,0 +1,88 @@
+import viajes.*
+import socios.*
+ 
+ describe"viajes"{
+ 	const ciudadNormal1 = new ViajeALaCiudad(atracciones = 4)
+ 	const ciudadTropical1 = new ViajeACiudadTropical(atracciones = 4)
+ 	const ciudadNormal2 = new ViajeALaCiudad(atracciones = 8)
+ 	const ciudadTropical2 = new ViajeACiudadTropical( atracciones = 8)
+ 	const ciudadTropical3 = new ViajeACiudadTropical(atracciones = 10)
+
+ 	// trekking
+ 	const t1 = new Trekking (kmsDeSenderos = 100, diasDeSol = 130)
+ 	const t2 = new Trekking (kmsDeSenderos = 50, diasDeSol = 240)
+ 	const t3 = new Trekking (kmsDeSenderos = 250, diasDeSol = 130)
+ 	
+ 	//viajes
+ 	const playa1 = new ViajeALaPlaya(largoPlaya = 1000)
+ 	const playa2 = new ViajeALaPlaya(largoPlaya = 2000)
+ 	//actividades
+ 	const g1 = new Gimnasia()
+ 	//socios
+ 	const roque = new Socio(lActvQuerealizo = [playa1, playa2], maxDeActv = 2)
+ 	const ana = new Socio(lActvQuerealizo = [playa1, playa2], maxDeActv = 3)
+ 	const paula = new Tranquilo (lActvQuerealizo = [playa1, playa2], maxDeActv = 8) 
+ 	
+ test"una excursión a ciudad normal (no tropical) en la que se visitan 4 atracciones, lleva 2 días, no implica esfuerzo, y no sirve para broncearse."{
+ 	assert.equals(2 , ciudadNormal1.cuantosDiasLlevaLaAct())
+ 	assert.equals(false, ciudadNormal1.implicaEsfuerzo())
+ 	assert.equals(false, ciudadNormal1.sirveParaBroncearse())
+ }
+ test"una excursión a ciudad tropical en la que se visitan 4 atracciones, lleva 3 días, no implica esfuerzo, y sí sirve para broncearse. "{
+ 	assert.equals(3 , ciudadTropical1.cuantosDiasLlevaLaAct())
+ 	assert.equals(false, ciudadTropical1.implicaEsfuerzo())
+ 	assert.equals(true, ciudadTropical1.sirveParaBroncearse())
+ }
+ test"una excursión a ciudad normal (no tropical) en la que se visitan 8 atracciones, lleva 4 días, implica esfuerzo, y no sirve para broncearse. "{
+ 	assert.equals(4 , ciudadNormal2.cuantosDiasLlevaLaAct())
+ 	assert.equals(true, ciudadNormal2.implicaEsfuerzo())
+ 	assert.equals(false, ciudadNormal2.sirveParaBroncearse())
+ }
+ test"una excursión a ciudad tropical en la que se visitan 8 atracciones, lleva 5 días, implica esfuerzo, y sirve para broncearse."{
+ 	assert.equals(5 , ciudadTropical2.cuantosDiasLlevaLaAct())
+ 	assert.equals(true, ciudadTropical2.implicaEsfuerzo())
+ 	assert.equals(true, ciudadTropical2.sirveParaBroncearse())
+ }
+ test"una excursión a ciudad tropical en la que se visitan 10 atracciones, lleva 6 días, no implica esfuerzo, y sí sirve para broncearse.  "{
+ 	assert.equals(6 , ciudadTropical3.cuantosDiasLlevaLaAct())
+ 	assert.equals(false, ciudadTropical3.implicaEsfuerzo())
+ 	assert.equals(true, ciudadTropical3.sirveParaBroncearse())
+ }
+ 
+ //trekking
+ 
+ test" una salida de 100 kilómetros a un lugar con 130 días de sol por año: lleva 2 días, implica esfuerzo, y no sirve para broncearse."{
+ 	assert.equals(2 , t1.cuantosDiasLlevaLaAct())
+ 	assert.equals(true, t1.implicaEsfuerzo())
+ 	assert.equals(false, t1.sirveParaBroncearse())
+ }
+  test"una salida de 50 kilómetros a un lugar con 240 días de sol por año: lleva 1 día, no implica esfuerzo, y sí sirve para broncearse."{
+ 	assert.equals(1 , t2.cuantosDiasLlevaLaAct())
+ 	assert.equals(false, t2.implicaEsfuerzo())
+//	assert.equals(true, t2.sirveParaBroncearse()) false porque una parte de la condicion es que haya mas de 120kms y en su lugar hay 50kms
+ }
+  test"una salida de 250 kilómetros a un lugar con 130 días de sol por año: lleva 5 días, implica esfuerzo, y sirve para broncearse."{
+ 	assert.equals(5 , t3.cuantosDiasLlevaLaAct())
+ 	assert.equals(true, t3.implicaEsfuerzo())
+ 	assert.equals(true, t3.sirveParaBroncearse())
+ }
+ //SOCIOS ROQUE Y ANA
+  test"Roque es adorador del sol"{
+ 	assert.equals(true, roque.esAdoradorDelSol())
+ }	
+ test"Roque tiene actividades forzadas"{
+ 	assert.equals([playa2], roque.actvsForzadas())
+ }
+
+ test"Ana es adorador del sol"{
+ 	ana.sumaUna(g1)
+ 	
+ 	assert.equals(false, ana.esAdoradorDelSol())
+ 	assert.equals([playa2, g1], ana.actvsForzadas())
+ }	
+ test"Es una activividad interesante para paula"{
+ 	assert.equals(false, ciudadTropical2.esRecomendadaPara(paula))
+ }
+ 
+ }
+ 
